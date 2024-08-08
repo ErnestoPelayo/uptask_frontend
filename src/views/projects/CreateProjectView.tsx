@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
-import { ProjectClass, ProjectFormData } from "../../types"
-import ErrorMessage from "../../components/ErrorMessage"
+import { Link, useNavigate } from "react-router-dom"
+import { ProjectFormData } from "../../types"
 import ProjectForm from "../../components/ProjectForm"
+import { createProject } from "../../api/ProjectApi"
 
 
 const CreateProjectView = () => {
+
+  const navigate = useNavigate()
 
   const initialValues: ProjectFormData = {
     projectName: "",
@@ -15,8 +17,9 @@ const CreateProjectView = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: initialValues })
 
-  const handleForm = (data: ProjectFormData) => {
-    console.log(data)
+  const handleForm = async (data: ProjectFormData) => {
+    await createProject(data)
+    navigate('/')
   }
 
   return (
@@ -42,7 +45,7 @@ const CreateProjectView = () => {
             register={register}
             errors ={errors}
           />
-          
+
           <input
             type="submit" value="Crear Proyecto"
             className=" bg-fuchsia-600 hover:bg-fuchsia-700 w-full text-white uppercase font-bold cursor-pointer transition-colors"
