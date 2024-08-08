@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom"
 import Logo from "../components/Logo"
 import NavMenu from "../components/NavMenu"
-
+import { ToastContainer } from "react-toastify" 
+import 'react-toastify/dist/ReactToastify.css'
 
 const AppLayout = () => {
   return (
@@ -18,8 +19,14 @@ const AppLayout = () => {
         <Outlet />
       </section>
       <footer className="py-5">
-        Año {new Date().getFullYear()}
+        <p className="text-center">
+          Año {new Date().getFullYear()}
+        </p>
       </footer>
+      <ToastContainer
+        pauseOnFocusLoss={false}
+        pauseOnHover={false}
+      />
     </div>
   )
 }
