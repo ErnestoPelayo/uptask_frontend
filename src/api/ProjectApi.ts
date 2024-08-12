@@ -41,3 +41,23 @@ export async function getProjectById(id:ProjectClass['_id']) {
         }
     }
 }
+
+
+type PropsUpdateProject = {
+    id:ProjectClass['_id'],
+    formData: ProjectFormData
+}
+
+export async function getUpdateProject({id,formData}:PropsUpdateProject) {
+    try {
+        const {data} = await api.put(`/projects/${id}`,formData)
+        const response =projectSchema.safeParse(data)
+        if(response.success){
+            return response.data
+        }
+    } catch (error) {
+        if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error)
+        }
+    }
+}

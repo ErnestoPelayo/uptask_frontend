@@ -60,7 +60,7 @@ const CreateProjectView = () => {
 
           <input
             type="submit" value="Crear Proyecto"
-            className=" bg-fuchsia-600 hover:bg-fuchsia-700 w-full text-white uppercase font-bold cursor-pointer transition-colors"
+            className="py-2 rounded-lg bg-fuchsia-600 hover:bg-fuchsia-700 w-full text-white uppercase font-bold cursor-pointer transition-colors"
           />
         </form>
       </div>
