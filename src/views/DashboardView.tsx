@@ -1,7 +1,8 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery,Mutation, useMutation} from "@tanstack/react-query"
 import { Link } from "react-router-dom"
-import { getProjects } from "../api/ProjectApi"
+import { deleteProject, getProjects } from "../api/ProjectApi"
 import Card from "../components/Card"
+import { toast } from "react-toastify"
 
 const DashboardView = () => {
 

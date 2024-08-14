@@ -61,3 +61,16 @@ export async function getUpdateProject({id,formData}:PropsUpdateProject) {
         }
     }
 }
+
+
+export async function deleteProject(id:ProjectClass['_id']) {
+    try {
+        const {data} = await api.delete<string>(`/projects/${id}`)
+        return data
+        
+    } catch (error) {
+        if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error)
+        }
+    }
+}

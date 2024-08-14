@@ -20,12 +20,3 @@ export const dashboardProjectSchema = z.array(
 export type DashboarProject = z.infer<typeof dashboardProjectSchema>
 export type ProjectClass = z.infer<typeof projectSchema>
 export type ProjectFormData = Pick<ProjectClass,'clientName' | 'projectName' | 'description'>
-
-/*
-
-export type ProjectClass = {
-    projectName:string,
-      clientName:string,
-      description:string,
-}
-      */

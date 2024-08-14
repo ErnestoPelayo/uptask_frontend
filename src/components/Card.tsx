@@ -3,12 +3,28 @@ import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { ProjectClass } from "../types"
 import { Link } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { deleteProject } from '../api/ProjectApi'
+import { toast } from 'react-toastify'
 
 type PropsCard = {
     project : ProjectClass
 }
 
 const Card = ({project} :PropsCard) => {
+
+    const queryClient = useQueryClient()
+    const mutation = useMutation({
+        mutationFn:deleteProject,
+        onError: (error)=>{
+          toast.error(error.message)
+        },
+        onSuccess :(data)=>{
+          toast.success(data)
+          queryClient.invalidateQueries({queryKey:['projects']})
+        }
+      })
+
   return (
     <ul role="list" className="divide-y divide-gray-100 border border-gray-100 mt-10 bg-white shadow-lg">
       <li key={project._id} className="flex justify-between gap-x-6 px-5 py-10">
@@ -54,7 +70,7 @@ const Card = ({project} :PropsCard) => {
                                   <button 
                                       type='button' 
                                       className='block px-3 py-1 text-sm leading-6 text-red-500'
-                                      onClick={() => {} }
+                                      onClick={() => mutation.mutate(project._id) }
                                   >
                                       Eliminar Proyecto
                                   </button>
